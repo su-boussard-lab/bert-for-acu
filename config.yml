@@ -14,14 +14,14 @@ logging:
 
 data:
   val_size: 0.2                                                 # Validation split percentage
-  data_path: "../data/big_chonkers.csv"              # Source to the language data
-  label_path: "../data/10893_LABELS.csv"                        # path to the labels
-  test_ids:  "../data/10893_TEST_IDS.csv"                       # test id path
-  train_ids:  "../data/10893_TRAIN_IDS.csv"                     # train data path
-  tabular_data_path: "../data/FULL_KNN.csv"                     # path to tabular data
+  data_path: "../data/TEXTS.csv"                                # Source to the language data
+  label_path: "../data/LABELS.csv"                              # path to the labels
+  test_ids:  "../data/TEST_IDS.csv"                             # test id path
+  train_ids:  "../data/TRAIN_IDS.csv"                           # train data path
+  tabular_data_path: "../data/SHR.csv"                          # path to tabular data
   label_type: "ANY_180"                                         # Which labels are being used
-  max_length: 3000                                               # 128 x 55 works, 256 x 25 (18 for GPT2, 50 for DistilBert) works too, 512 x 20 (DB)
-  max_words: 1
+  max_length: 256                                               # 128 x 55 works, 256 x 25 (18 for GPT2, 50 for DistilBert) works too, 512 x 20 (DB)
+  max_words: 50
   
   
 train:
@@ -34,16 +34,16 @@ train:
 
 
 model:
-  bert_model: "allenai/longformer-base-4096"        # Name of the deep architecture "allenai/longformer-base-4096, "emilyalsentzer/Bio_ClinicalBERT", "distilbert-base-uncased" 
-  bert_finetuning: True                           # If the encoder weights are frozen
-  dropout_p: 0.25                                  # Dropout
-  mc_dropout: True                               # Monte Carlo Dropout flag for uncertainty prediction
-  mc_samples: 10                                     # MC Dropout forward passes
-  save_path: "experiments/"                       # Path to save the models
-  cls_pooling: True                               # true if only to pool on the CLS token, otherwise pools on full embedding
+  bert_model: "distilbert-base-uncased"                         # Name of the deep architecture "allenai/longformer-base-4096, "emilyalsentzer/Bio_ClinicalBERT", "distilbert-base-uncased" 
+  bert_finetuning: True                                         # If the encoder weights are frozen
+  dropout_p: 0.25                                               # Dropout
+  mc_dropout: True                                              # Monte Carlo Dropout flag for uncertainty prediction
+  mc_samples: 10                                                # MC Dropout forward passes
+  save_path: "experiments/"                                     # Path to save the models
+  cls_pooling: True                                             # true if only to pool on the CLS token, otherwise pools on full embedding
   L1_weight: 0.01
-  intermediate_mlp_size: -1                       # Intermediate MLP between embeddings and fc classifier. if -1 it is skipped
-  fusion_model: "logistic"                        # either "logistic", "attention", "sequence_attention",
+  intermediate_mlp_size: -1                                     # Intermediate MLP between embeddings and fc classifier. if -1 it is skipped
+  fusion_model: "logistic"                                      # either "logistic", "attention", "sequence_attention",
   pretrained_path: "20220711_nlp_ordinal_distilbert_256_4b_dropout"
   
 
