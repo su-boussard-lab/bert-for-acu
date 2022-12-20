@@ -1,0 +1,12 @@
+ignite==1.1.0
+ipython==8.4.0
+munch==2.5.0
+numpy==1.22.3
+pandas==1.4.2
+PyYAML==6.0
+scikit_learn==1.1.1
+torch==1.11.0
+torch_scatter==2.0.9
+tqdm==4.64.0
+transformers==4.18.0
+uncertainty_calibration==0.0.9
