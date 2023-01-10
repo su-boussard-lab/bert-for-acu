@@ -1,0 +1,60 @@
+comments: "ablation study longformer"
+name: "language_BERT_longformer" # name of the current config file
+seed: 11 # random seed for reproducible results.
+debug: True # debugging mode, activated if True
+tb_log_dir: "tb-logger/" # Tensorboard logging directory
+ordinal_regression: True # Use ordinal regression, learning all four times at once
+use_tabular: False # Use tabular data aditionally
+pretrained: False # Use a pretrained NLP model, not the same as a pretrained BERT
+indipendent_chunks: False # Use independent chunks to train, and then cumulate the prediction, rather than meaning the embeddings
+
+logging:
+  name: "BERTlogger" # name of the logger
+  filename: "mylog.log" # name of the logging file
+  level: error # logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+data:
+  val_size: 0.2 # Validation split percentage
+  data_path: "../data/bert_256_clinical_notes.csv" # Source to the language data
+  label_path: "../data/10893_LABELS.csv" # path to the labels
+  test_ids: "../data/10893_TEST_IDS.csv" # test id path
+  train_ids: "../data/10893_TRAIN_IDS.csv" # train data path
+  tabular_data_path: "../data/FULL_KNN.csv" # path to tabular data
+  label_type: "ANY_30" # Which labels are being used
+  max_length: 1024 # 128 x 55 works, 256 x 25 (18 for GPT2, 50 for DistilBert) works too, 512 x 20 (DB)
+  max_words: 3
+
+train:
+  batch_size: 2 # size of the trainng and test batches
+  epochs: 10 # Number of going through the data
+  boost: False # ?
+  log_interval: 100 # logging interval
+  early_stop_patience: 4 # Early stopping patiece
+  weighted_loss: False # Adds inverse class weights to the losses
+
+model:
+  bert_model: "allenai/longformer-base-4096" #"distilbert-base-uncased"      # Name of the deep architecture "allenai/longformer-base-4096, "emilyalsentzer/Bio_ClinicalBERT"
+  bert_finetuning: True # If the encoder weights are frozen
+  dropout_p: 0.25 # Dropout
+  mc_dropout: False # Monte Carlo Dropout flag for uncertainty prediction
+  mc_samples: 10 # MC Dropout forward passes
+  save_path: "experiments/" # Path to save the models
+  cls_pooling: True # true if only to pool on the CLS token, otherwise pools on full embedding
+  L1_weight: 0.01
+  intermediate_mlp_size: -1 # Intermediate MLP between embeddings and fc classifier. if -1 it is skipped
+  fusion_model: "sequence_attention" # either "logistic", "attention", "sequence_attention",
+  pretrained_path: "20220711_nlp_ordinal_distilbert_256_4b_dropout"
+
+optimizer:
+  name: "Adam" # SGD or Adam
+  lr: 0.00001 # Learning Rate for the fully connected layer
+  lr_main: 0.000001 # learning rate for BERT
+  momentum: 0.9 # Momentum
+  weight_decay: 0.001 # Weight Decay
+  betas: [0.9, 0.999] # ADAM betas
+
+scheduler:
+  name: "step" # Scheduler, either "poly", "step"
+  lr_reduce_factor: 0.5 # Learning rate reduction for "step"
+  step_size: 5 # Patience for "step"
+  poly_reduce: 0.9 # polynomial for "poly" reduction

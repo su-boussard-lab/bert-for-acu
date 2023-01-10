@@ -38,6 +38,7 @@ conda install -r requirements.txt
 ### Source Code Directory Tree
 ```
 .
+├── experiment_scripts  # Config files to rerun training of the BERT models
 └── src                 # Source code            
     ├── layers              # Single Neural Network layers
     ├── model               # Neural Network Models for NLP
@@ -48,9 +49,10 @@ conda install -r requirements.txt
 ## Running the Experiments
 To run the models, you first need to prepare the data. For this experiment we expect five CSV files: `TEXTS.csv` shall contain the unstructured health notes, `SHR.csv` should contain the structured health records, `LABELS.csv` should contain the labels. Both of these should be indexed by a patient deidentifier number. `TEST_IDS.csv` and `TRAIN_IDS.csv` are CSV files that contain the patiend deid files of the test and training set, respectively. You can change the paths in `config.yml` file. In this file you can also set which model should be fitted, by setting their flags to either True or False
 
-The weights used for this experiments, were from runs:
-- language: `20220711_nlp_ordinal_distilbert_256_4b`
-- fusion: `20220713_multimodal_logistic_ordinal_2`
+The configs used for the experiments can be found here:
+- language: `experiment_scripts/language_BERT.yml`
+- fusion: `experiment_scripts/fusion_BERT.yml`
+If you wish to have the trained weights directly, please reach out to fanconic@ethz.ch
 
 To train the model on one single GPU, you can execute the script
 ```
