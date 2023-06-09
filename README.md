@@ -4,10 +4,11 @@
 "Natural Language Processing Methods to Identify Oncology Patients at High Risk for Acute Care with Clinical Notes" - ETH Master Thesis by Claudio Fanconi 
 
 ## Description
-This repository is used for training deep language models in order to predict the risk of acute care utilization for patients that start chemotherapy. It is the code for the Paper [Natural Language Processing Methods to Identify Oncology Patients at High Risk for Acute Care with Clinical Notes](https://arxiv.org/pdf/2209.13860.pdf)
+This repository is used for training deep language models in order to predict the risk of acute care utilization for patients that start chemotherapy. It is the code for the Paper [Natural Language Processing Methods to Identify Oncology Patients at High Risk for Acute Care with Clinical Notes](https://arxiv.org/pdf/2209.13860.pdf). Link to the repository with the linear models is [here](https://github.com/su-boussard-lab/nlp-for-acu).
 
 ## Abstract
-Clinical notes are an essential component of the health record. This paper evaluates how natural language processing (NLP) can be used to identify risk of acute care use (ACU) in oncology patients, once chemotherapy starts. Risk prediction using structured health data (SHD) is now standard, but predictions using free-text formats are complex. This paper explores the use of free-text notes for prediction of ACU in leu of SHD. Deep Learning models were compared to manually engineered language features. Results show that SHD models minimally outperform NLP models; an `1-penalised logistic regression with SHD achieved a C-statistic of 0.748 (95%-CI: 0.735, 0.762), while the same model with language features achieved 0.730 (95%-CI: 0.717, 0.745) and a transformer-based model achieved 0.702 (95%-CI: 0.688, 0.717). This paper shows how language models can be used in clinical applications and underlines how risk bias is different for diverse patient groups, even using only free-text data.
+Clinical notes are an essential component of the health record. This paper evaluates how natural language processing (NLP) can be used to identify risk of acute care use (ACU) in oncology patients, once chemotherapy starts. Risk prediction using structured health data (SHD) is now standard, but predictions using free-text formats are complex. This paper explores the use of free-text notes for prediction of ACU in leu of SHD. Deep Learning models were compared to manually engineered language features. Results show that SHD models minimally outperform NLP models; an L1-penalised logistic regression with SHD achieved a C-statistic of 0.748 (95%-CI: 0.735, 0.762), while the same model with language features achieved 0.730 (95%-CI: 0.717, 0.745) and a transformer-based model achieved 0.702 (95%-CI: 0.688, 0.717). This paper shows how language models can be used in clinical applications and underlines how risk bias is different for diverse patient groups, even using only free-text data.
+
 ## Cite Us
 
 ```
@@ -66,7 +67,7 @@ bash run_parallel_experiment.sh
 
 
 ## Authors
-- Claudio Fanconi (fanconic@ethz.ch) (code)
+- Claudio Fanconi (fanconic@ethz.ch)
 - Marieke van Buchem
 - Tina Hernandez-Boussard
 
